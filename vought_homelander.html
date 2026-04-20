@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vought International | Everyone's Watching</title>
+    <style>
+        /* ОСНОВНЫЕ СТИЛИ */
+        :root {
+            --v-blue: #002d72;
+            --v-gold: #c5a059;
+            --v-red: #bb133e;
+            --v-dark: #050505;
+            --v-gray: #1a1a1a;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--v-dark);
+            color: white;
+            font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ШАПКА */
+        header {
+            background: rgba(0, 45, 114, 0.95);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--v-gold);
+            box-sizing: border-box;
+        }
+
+        .logo-area {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px var(--v-red);
+        }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--v-gold); }
+
+        .login-btn {
+            background: var(--v-gold);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* ГЛАВНЫЙ БАННЕР (HERO) */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), 
+                        url('https://wallpapercave.com/wp/wp6602052.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 0; /* Шапка фиксированная */
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            color: var(--v-gold);
+            max-width: 800px;
+            margin: 20px 0 40px;
+        }
+
+        .main-btn {
+            background: var(--v-red);
+            color: white;
+            padding: 20px 50px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .main-btn:hover {
+            background: transparent;
+            border-color: var(--v-red);
+            transform: scale(1.05);
+        }
+
+        /* СЕКЦИЯ СЕМЕРКИ */
+        .seven-section {
+            padding: 100px 50px;
+            background: linear-gradient(to bottom, #000, var(--v-dark));
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--v-gold);
+            margin-bottom: 60px;
+        }
+
+        .seven-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .hero-card {
+            background: var(--v-gray);
+            border: 1px solid #333;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hero-card:hover {
+            border-color: var(--v-gold);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.2);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: 0.4s;
+        }
+
+        .hero-card:hover img {
+filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .hero-info {
+            padding: 20px;
+            background: linear-gradient(to top, #000, transparent);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hero-info h3 { margin: 0; color: white; font-size: 20px; }
+        .hero-info p { margin: 5px 0 0; color: var(--v-gold); font-size: 14px; }
+
+        /* НОВОСТИ */
+        .news-section {
+            padding: 80px 50px;
+            background-color: #000;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .news-item {
+            background: var(--v-gray);
+            padding: 20px;
+            border-left: 5px solid var(--v-blue);
+        }
+
+        .news-item h4 { color: white; margin: 0 0 10px; }
+        .news-item p { color: #aaa; font-size: 14px; margin: 0; }
+
+        /* МАГАЗИН */
+        .shop-section {
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .merch-item {
+            background: #111;
+            padding: 20px;
+            border: 1px solid #222;
+        }
+
+        .merch-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        /* ПОДВАЛ И ВХОД */
+        footer {
+            background: #000;
+            padding: 60px 50px;
+            text-align: center;
+            border-top: 2px solid var(--v-gray);
+            font-size: 12px;
+            color: #444;
+        }
+
+        .admin-login {
+            margin-top: 30px;
+            opacity: 0.3;
+            transition: 0.5s;
+        }
+
+        .admin-login:hover { opacity: 1; }
+
+        .admin-login input {
+            background: #111;
+            border: 1px solid #333;
+            color: #555;
+            padding: 5px;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">VOUGHT</div>
+        <nav>
+            <a href="#seven">Семерка</a>
+            <a href="#news">Новости</a>
+            <a href="#shop">Мерч</a>
+            <span class="login-btn" onclick="alert('Доступ только для сотрудников уровня 4+')">V-NET LOGIN</span>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>АМЕРИКА, МЫ С ВАМИ</h1>
+        <p>Безопасность. Стабильность. Героизм. Vought International — мы делаем мир лучше каждый день под предводительством величайшего героя Земли.</p>
+        <a href="#" class="main-btn" onclick="alert('Спасибо за веру в Vought! Ваша поддержка зафиксирована.')">СТАТЬ ПАРТНЕРОМ</a>
+    </section>
+
+    <section id="seven" class="seven-section">
+        <div class="section-title">ВСТРЕЧАЙТЕ СВОИХ ГЕРОЕВ</div>
+        <div class="seven-grid">
+            
+            <div class="hero-card">
+                <img src="https://m.media-amazon.com/images/M/MV45NTQ3MDAtYjg4ZC00ZGU4LTljMDgtZGI2NGZiMzg1Yjk4XkEyXkFqcGdeQXVyNjYyNDY5Mjc@._V1_.jpg" alt="Хоумлендер">
+                <div class="hero-info">
+                    <h3>ХОУМЛЕНДЕР</h3>
+                    <p>Лидер. Спаситель. Патриот.</p>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjcxOTA0MzktMGVhNy00YzRiLTkxOTMtM2NlMjkyZmIzNDI4XkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg" alt="Старлайт">
+                <div class="hero-info">
+                    <h3>СТАРЛАЙТ</h3>
+                    <p>Свет надежды Америки.</p>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMWM3MjUxMGMtMTAyMy00ZDdlLWIyY2MtNGUyNWQ3ZmI2YWRhXkEyXkFqcGdeQXVyNTMxMjgxMzA@._V1_.jpg" alt="Поезд-А">
+                <div class="hero-info">
+                    <h3>ПОЕЗД-А</h3>
+<p>Самый быстрый человек в мире.</p>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjNjY2JkMDYtMTYxNC00ZWYxLTg2YWItNDdmZTk5NWMwYzZkXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_.jpg" alt="Подводный">
+                <div class="hero-info">
+                    <h3>ПОДВОДНЫЙ</h3>
+                    <p>Повелитель семи океанов.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="news" class="news-section">
+        <div class="section-title">КОРПОРАТИВНЫЕ НОВОСТИ</div>
+        <div class="news-grid">
+            <div class="news-item">
+                <h4>Рейтинги Хоумлендера достигли исторических 98%!</h4>
+                <p>Америка любит своего лидера. Vought объявляет неделю благодарности.</p>
+            </div>
+            <div class="news-item">
+                <h4>Новый вкус Turbo Rush уже в продаже!</h4>
+                <p>Зарядись энергией Поезда-А. Теперь со вкусом "Электрический лайм".</p>
+            </div>
+            <div class="news-item">
+                <h4>Благотворительный гала-концерт Семерки</h4>
+                <p>Сбор средств для фонда "Герои для детей". Билеты раскуплены за 3 минуты.</p>
+            </div>
+            <div class="news-item">
+                <h4>Заявление Vought по поводу инцидента в Нью-Йорке</h4>
+                <p>Это была спланированная акция супертеррористов. Наши герои успешно ликвидировали угрозу.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="shop-section">
+        <div class="section-title">МЕРЧ VOUGHT</div>
+        <div class="merch-grid">
+            <div class="merch-item">
+                <div style="background:#222; height:200px; display:flex; align-items:center; justify-content:center; color:#555;">[ФИГУРКА ХОУМЛЕНДЕРА]</div>
+                <p>Коллекционная фигурка (Limited)</p>
+                <div style="color:var(--v-gold)">$299.99</div>
+            </div>
+            <div class="merch-item">
+                <div style="background:#222; height:200px; display:flex; align-items:center; justify-content:center; color:#555;">[ФУТБОЛКА СЕМЕРКИ]</div>
+                <p>Футболка "We Save America"</p>
+                <div style="color:var(--v-gold)">$49.99</div>
+            </div>
+            <div class="merch-item">
+                <div style="background:#222; height:200px; display:flex; align-items:center; justify-content:center; color:#555;">[ПОСТЕР СТАРЛАЙТ]</div>
+                <p>Постер с автографом</p>
+                <div style="color:var(--v-gold)">$99.99</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>VOUGHT INTERNATIONAL &copy; 2026. "Bringing Heroes to You."</p>
+        <p>Внимание: Нажимая на любую кнопку, вы соглашаетесь на передачу биометрических данных и постоянный мониторинг.</p>
+        
+        <div class="admin-login">
+            <p>V-NET INTERNAL LOGIN</p>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button onclick="alert('Критическая ошибка. Патриот уведомлен.')" style="background:#333; color:#aaa; border:none; padding:5px 10px;">Login</button>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vought International | The Seven Official</title>
+    <style>
+        :root {
+            --v-blue: #002d72;
+            --v-gold: #c5a059;
+            --v-red: #bb133e;
+            --v-dark: #050505;
+        }
+
+        body {
+            margin: 0;
+            background: var(--v-dark);
+            color: white;
+            font-family: 'Arial Black', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: var(--v-blue);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--v-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-banner {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), 
+                        url('https://images.hdqwalls.com/download/the-boys-season-2-5k-4e-1920x1080.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 5px solid var(--v-red);
+        }
+
+        .main-banner h1 { font-size: 4rem; margin: 0; text-shadow: 0 0 20px #000; }
+
+        .container { padding: 40px 20px; text-align: center; }
+
+        .seven-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #111;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--v-gold); }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
+        .card-name { padding: 10px; color: var(--v-gold); font-size: 1.2rem; background: #000; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: #111;
+            margin: 5% auto;
+            width: 85%;
+            max-width: 800px;
+            border: 2px solid var(--v-gold);
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .m-left { width: 40%; }
+        .m-left img { width: 100%; height: 100%; object-fit: cover; }
+        .m-right { width: 60%; padding: 30px; text-align: left; position: relative; }
+        .close { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: var(--v-gold); }
+        
+        .stat-box { margin-bottom: 15px; }
+        .stat-label { color: var(--v-red); font-size: 0.7rem; text-transform: uppercase; display: block; font-weight: bold; }
+        .stat-value { font-size: 1rem; color: #ccc; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>VOUGHT INTERNATIONAL</div>
+    <div style="color: var(--v-gold); font-size: 12px;">PERSONNEL DATABASE V.3.1</div>
+</header>
+
+<div class="main-banner">
+    <h1>МЫ ВАС ЗАЩИТИМ</h1>
+    <p style="font-size: 1.5rem; color: var(--v-gold);">Встречайте легендарную Семерку</p>
+</div>
+
+<div class="container">
+    <div class="seven-grid">
+        <div class="card" onclick="openModal('homelander')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/7/7e/Homelander_Vought_Stock_Photo.jpg">
+            <div class="card-name">ХОУМЛЕНДЕР</div>
+        </div>
+        <div class="card" onclick="openModal('maeve')">
+            <img src="https://static.wikia.nocookie.
+net/amazon-the-boys/images/0/07/Queen_Maeve_Vought_Stock_Photo.jpg">
+            <div class="card-name">КОРОЛЕВА МЭЙВ</div>
+        </div>
+        <div class="card" onclick="openModal('blacknoir')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/0/03/Black_Noir_Vought_Stock_Photo.jpg">
+            <div class="card-name">ЧЕРНЫЙ НУАР</div>
+        </div>
+        <div class="card" onclick="openModal('atrain')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/2/22/A-Train_Vought_Stock_Photo.jpg">
+            <div class="card-name">ПОЕЗД-А</div>
+        </div>
+        <div class="card" onclick="openModal('starlight')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/0/07/Starlight_Vought_Stock_Photo.jpg">
+            <div class="card-name">СТАРЛАЙТ</div>
+        </div>
+        <div class="card" onclick="openModal('deep')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/b/b2/The_Deep_Vought_Stock_Photo.jpg">
+            <div class="card-name">ПОДВОДНЫЙ</div>
+        </div>
+        <div class="card" onclick="openModal('translucent')">
+            <img src="https://static.wikia.nocookie.net/amazon-the-boys/images/0/03/Translucent_Vought_Stock_Photo.jpg">
+            <div class="card-name">ПРОЗРАЧНЫЙ</div>
+        </div>
+    </div>
+</div>
+
+<div id="hModal" class="modal">
+    <div class="modal-content">
+        <div class="m-left"><img id="mImg" src=""></div>
+        <div class="m-right">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="mName" style="color:var(--v-gold); margin-top: 0;"></h2>
+            <div id="mStats"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const data = {
+        homelander: { name: "ХОУМЛЕНДЕР", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/7/7e/Homelander_Vought_Stock_Photo.jpg", 
+            info: "Способности: Полет, лазеры, суперсила. Лидер команды." },
+        maeve: { name: "КОРОЛЕВА МЭЙВ", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/0/07/Queen_Maeve_Vought_Stock_Photo.jpg", 
+            info: "Способности: Невероятная стойкость и боевые навыки." },
+        blacknoir: { name: "ЧЕРНЫЙ НУАР", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/0/03/Black_Noir_Vought_Stock_Photo.jpg", 
+            info: "Способности: Сверхчеловеческая сила и скрытность. Мастер боевых искусств." },
+        atrain: { name: "ПОЕЗД-А", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/2/22/A-Train_Vought_Stock_Photo.jpg", 
+            info: "Способности: Самый быстрый человек на Земле." },
+        starlight: { name: "СТАРЛАЙТ", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/0/07/Starlight_Vought_Stock_Photo.jpg", 
+            info: "Способности: Излучение света, поглощение энергии." },
+        deep: { name: "ПОДВОДНЫЙ", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/b/b2/The_Deep_Vought_Stock_Photo.jpg", 
+            info: "Способности: Дыхание под водой, телепатия с морскими гадами." },
+        translucent: { name: "ПРОЗРАЧНЫЙ", img: "https://static.wikia.nocookie.net/amazon-the-boys/images/0/03/Translucent_Vought_Stock_Photo.jpg", 
+            info: "Способности: Кожа из углеродного метаматериала, невидимость." }
+    };
+
+    function openModal(id) {
+        const h = data[id];
+        document.getElementById('mName').innerText = h.name;
+        document.getElementById('mImg').src = h.img;
+        document.getElementById('mStats').innerHTML = <div class="stat-box"><span class="stat-label">Досье</span><span class="stat-value">${h.info}</span></div>;
+        document.getElementById('hModal').style.display = 'block';
+    }
+    function closeModal() { document.getElementById('hModal').style.display = 'none'; }
+    window.onclick = function(e) { if (e.target == document.getElementById('hModal')) closeModal(); }
+</script>
+
+</body>
+</html>
